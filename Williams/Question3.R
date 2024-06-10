@@ -10,7 +10,6 @@ covid_hospitalizations <- read_csv("https://raw.githubusercontent.com/36-SURE/36
 #view(covid_hospitalizations)
 
 #Summarize ventilator data by date
-#Change dates
 ventilator_dynamics <- covid_hospitalizations %>%
   group_by(month = floor_date(date, "month")) |> 
   filter(vents_use == as.factor(vents_use), vents == as.factor(vents)) |> 
