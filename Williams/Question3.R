@@ -15,6 +15,7 @@ ventilator_dynamics <- covid_hospitalizations %>%
   filter(vents_use == as.factor(vents_use), vents == as.factor(vents)) |> 
   summarize(mean_vents_use = mean(vents_use), mean_vents_total = mean(vents), na.rm = T)
 
+#updated 
 # Line plot for ventilator dynamics over time
 ggplot(ventilator_dynamics, aes(x = month)) +
   geom_line(aes(y=mean_vents_use, color = "Ventilators in Use")) + 
