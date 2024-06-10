@@ -26,4 +26,3 @@ ggplot(ventilator_dynamics, aes(x = date)) +
        color = "Ventilator Use") +
   theme_light() 
 
-#lubridate(groups by month)
