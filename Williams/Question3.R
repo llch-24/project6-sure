@@ -7,7 +7,7 @@
 library(tidyverse)
 covid_hospitalizations <- read_csv("https://raw.githubusercontent.com/36-SURE/36-SURE.github.io/main/data/covid_hospitalizations.csv")
 
-#view(covid_hospitalizations)
+view(covid_hospitalizations)
 
 #Summarize ventilator data by date
 ventilator_dynamics <- covid_hospitalizations %>%
@@ -15,7 +15,6 @@ ventilator_dynamics <- covid_hospitalizations %>%
   filter(vents_use == as.factor(vents_use), vents == as.factor(vents)) |> 
   summarize(mean_vents_use = mean(vents_use), mean_vents_total = mean(vents), na.rm = T)
 
-#updated 
 # Line plot for ventilator dynamics over time
 ggplot(ventilator_dynamics, aes(x = month)) +
   geom_line(aes(y=mean_vents_use, color = "Ventilators in Use")) + 
