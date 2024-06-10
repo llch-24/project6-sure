@@ -12,17 +12,16 @@ covid_hospitalizations <- read_csv("https://raw.githubusercontent.com/36-SURE/36
 #Summarize ventilator data by date
 #Change dates
 ventilator_dynamics <- covid_hospitalizations %>%
-  group_by() %>%
-  summarise(total_vents = mean(vents, na.rm = TRUE),
-            vents_in_use = mean(vents_use, na.rm = TRUE))
+  group_by(month = floor_date(date, "month")) |> 
+  filter(vents_use == as.factor(vents_use), vents == as.factor(vents)) |> 
+  summarize(mean_vents_use = mean(vents_use), mean_vents_total = mean(vents), na.rm = T)
 
 # Line plot for ventilator dynamics over time
-ggplot(ventilator_dynamics, aes(x = date)) +
-  geom_line(aes(y = total_vents, color = "Total Ventilators")) +
-  geom_line(aes(y = vents_in_use, color = "Ventilators in Use")) +
+ggplot(ventilator_dynamics, aes(x = month)) +
+  geom_line(aes(y=mean_vents_use, color = "Ventilators in Use")) + 
+  geom_line(aes(y=mean_vents_total, color = "Total Ventilators")) +
   labs(title = "Ventilator Use Dynamics Over Time",
        x = "Date",
        y = "Number of Ventilators",
        color = "Ventilator Use") +
-  theme_light() 
-
+  theme_light()
