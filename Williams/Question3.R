@@ -12,7 +12,7 @@ covid_hospitalizations <- read_csv("https://raw.githubusercontent.com/36-SURE/36
 #Summarize ventilator data by date
 #Change dates
 ventilator_dynamics <- covid_hospitalizations %>%
-  group_by(date) %>%
+  group_by() %>%
   summarise(total_vents = mean(vents, na.rm = TRUE),
             vents_in_use = mean(vents_use, na.rm = TRUE))
 
